@@ -11,8 +11,8 @@ namespace NLayer.Core
         public int Id { get; set; }
         public string Color { get; set; } 
         public int Height { get; set; } 
-        public int HeightWidth { get; set; } 
-        public int ProductId { get; set; } //foreignkey
+        public int Width { get; set; } 
+        public int ProductId { get; set; }  //foreignkey
         public Product Product { get; set; } 
     }
 }

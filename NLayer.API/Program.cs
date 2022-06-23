@@ -1,11 +1,33 @@
+﻿using Microsoft.EntityFrameworkCore;
+using NLayer.Core.Repositories;
+using NLayer.Core.UnitOfWorks;
+using NLayer.Data;
+using NLayer.Data.Repositories;
+using NLayer.Data.UnitOfWorks;
+using System.Reflection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+
+builder.Services.AddDbContext<AppDbContext>(x =>
+{
+    x.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection "), option => //contexım dataassebly ıcınde 
+    {
+        option.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name);           //dinamık oalrak katmaın adını aldık
+    });
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IUnitOfWork, UnitofWork>();
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+
 
 var app = builder.Build();
 

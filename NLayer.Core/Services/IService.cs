@@ -18,7 +18,7 @@ namespace NLayer.Core.Services
         //core katmanında update remove için Asyn metotları yoktu.ama Iservice de verıtabanına değişiklikleri yansıtacagımız ıcın async ye dönüştürdum.
         Task UpdateAsync(T entity);
         Task RemoveAsync(T entity);
-        Task RemoveRangeAsync(IEnumerable<T> entites);
+        Task RemoveRangeAsync(IEnumerable<T> entities);
     }
 }
  
