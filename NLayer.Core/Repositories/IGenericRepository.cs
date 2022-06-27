@@ -6,7 +6,7 @@ namespace NLayer.Core.Repositories
     {
         Task<T> GetByIdAsync(int id);
         IQueryable<T> where (Expression <Func<T, bool>> expression); 
-        IQueryable<T> GetAll (Expression <Func<T, bool>> expression); 
+        IQueryable<T> GetAll (); 
         Task<bool> AnyAsync(Expression<Func<T, bool>> expression); //varmı
         Task AddAsync(T entity);
         Task AddRangeAsync(IEnumerable<T>entites);   //list degıl interface alıyorum

@@ -13,8 +13,8 @@ namespace NLayer.Core.Services
         IQueryable<T> where(Expression<Func<T, bool>> expression);
         Task<IEnumerable<T>> GetAllAsync();
         Task<bool> AnyAsync(Expression<Func<T, bool>> expression); //varmı
-        Task AddAsync(T entity);
-        Task AddRangeAsync(IEnumerable<T> entites);
+        Task  <T>AddAsync(T entity);
+        Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entites);
         //core katmanında update remove için Asyn metotları yoktu.ama Iservice de verıtabanına değişiklikleri yansıtacagımız ıcın async ye dönüştürdum.
         Task UpdateAsync(T entity);
         Task RemoveAsync(T entity);

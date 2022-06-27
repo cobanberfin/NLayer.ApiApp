@@ -21,52 +21,57 @@ namespace NLayer.Service.Service
             _repository = repository;
             _unitOfWork = unitOfWork;
         } 
-        public async Task AddAsync(T entity)
+        public async Task<T> AddAsync(T entity) //ıdsını kullnamka ıstrsek dıye t don
         {
-           await _repository.AddAsync(entity);
+            await _repository.AddAsync(entity);
             await _unitOfWork.CommitAsync();
-          
+            return entity;
 
         }
 
-        public Task AddRangeAsync(IEnumerable<T> entites)
+        public async Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entites)
         {
-            throw new NotImplementedException();
+            await _repository.AddRangeAsync(entites);
+            await _unitOfWork.CommitAsync();
+            return entites;
         }
 
-        public Task<bool> AnyAsync(Expression<Func<T, bool>> expression)
+        public async Task<bool> AnyAsync(Expression<Func<T, bool>> expression)
         {
-            throw new NotImplementedException();
+             return await _repository.AnyAsync(expression);
         }
 
-        public Task<IEnumerable<T>> GetAllAsync()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _repository.GetAll().ToListAsync();
         }
 
-        public Task<T> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _repository.GetByIdAsync(id);
         }
 
-        public Task RemoveAsync(T entity)
+        public async Task RemoveAsync(T entity)
         {
-            throw new NotImplementedException();
+             _repository.Remove(entity);
+           await  _unitOfWork.CommitAsync();
         }
 
-        public Task RemoveRangeAsync(IEnumerable<T> entites)
+        public  async Task RemoveRangeAsync(IEnumerable<T> entites)
         {
-            throw new NotImplementedException();
+            _repository.RemoveRange(entites);
+            await _unitOfWork.CommitAsync();
         }
 
-        public Task UpdateAsync(T entity)
+            public async Task UpdateAsync(T entity)
         {
-            throw new NotImplementedException();
+            _repository.Update(entity);
+            await _unitOfWork.CommitAsync();
         }
 
-        public IQueryable<T> where(Expression<Func<T, bool>> expression)
+        public IQueryable<T> where(Expression<Func<T, bool>> expression)//IQuery donuyor asyn lık durum yok.tolist veya tolistasyncı bu metodu cagırdgımzda kullancak yanı apı tarfında
         {
-            throw new NotImplementedException();
+           return _repository.where(expression);
         }
     }
 }

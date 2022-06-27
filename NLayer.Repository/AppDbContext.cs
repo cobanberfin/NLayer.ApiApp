@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NLayer.Core;
+using NLayer.Core.Entites;
 using NLayer.Data.Configurations;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 //options ile
 namespace NLayer.Data
 {
-   public class AppDbContext:DbContext
+    public class AppDbContext:DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext>options):base(options)
         {
